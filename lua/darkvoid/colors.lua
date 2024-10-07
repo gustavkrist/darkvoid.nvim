@@ -5,6 +5,7 @@ M.config = {
 	transparent = false,
 	glow = false,
 	show_end_of_buffer = true,
+  disabled_plugins = {},
 
 	colors = {
 		fg = "#c0c0c0",

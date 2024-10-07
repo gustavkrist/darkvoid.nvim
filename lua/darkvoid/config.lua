@@ -13,12 +13,14 @@ local function load_plugins(colors, config)
 	}
 
 	for _, plugin in ipairs(plugins) do
-		local ok, plugin_config = pcall(require, "darkvoid.plugins." .. plugin)
-		if ok then
-			plugin_config.setup(colors, config)
-		else
-			print("Failed to load " .. plugin .. " configuration")
-		end
+    if not vim.tbl_contains(config.disabled_plugins, plugin) then
+      local ok, plugin_config = pcall(require, "darkvoid.plugins." .. plugin)
+      if ok then
+        plugin_config.setup(colors, config)
+      else
+        print("Failed to load " .. plugin .. " configuration")
+      end
+    end
 	end
 end
 

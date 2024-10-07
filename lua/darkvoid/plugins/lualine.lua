@@ -1,12 +1,12 @@
 local M = {}
 
-function M.setup(colors, config)
+function M.get_theme(colors, config)
 	-- Determine common background color and glow effect
 	local common_bg = config.transparent and "NONE" or colors.bg
 	local glow_fg = config.glow and "bold" or "NONE"
 
 	-- Define the theme for lualine
-	local lualine_theme = {
+	return {
 		normal = {
 			a = {
 				bg = config.transparent and "NONE" or colors.bool,
@@ -46,7 +46,10 @@ function M.setup(colors, config)
 			c = { bg = colors.eob, fg = colors.string },
 		},
 	}
+end
 
+function M.setup(colors, config)
+  local lualine_theme = M.get_theme(colors, config)
 	-- Check if lualine is available before setting it up
 	local ok, lualine = pcall(require, "lualine")
 	if ok then
